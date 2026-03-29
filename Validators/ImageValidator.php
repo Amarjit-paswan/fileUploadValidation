@@ -1,17 +1,18 @@
 <?php 
 
 class ImageValidator implements FileValidatorInterface{
+    use FileHelpertrait;
 
     public function validate($file){
 
-        // store uploaded file info
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
+        $this->checkUploadError($file);
+
         $fileSize = $file['size'];
 
-        //find the extension of file
-        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $mimeType = mime_content_type($fileTmpName);
+        //extract the extension of file
+        $extension = $this->getExtension($file);
+        //extract the mime type
+        $mimeType = $this->getMimeType($file);
 
         $allowedExtension = ['png','jpeg', 'jpg']; //allowed extension
         $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg']; //allowed mime types
