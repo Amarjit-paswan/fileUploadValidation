@@ -3,7 +3,7 @@
 require_once __DIR__ . '../../resolvers/ValidatorResolver.php';
 
 class FileUploader{
-    
+
     use FileHelpertrait;
 
     public function upload($files){
